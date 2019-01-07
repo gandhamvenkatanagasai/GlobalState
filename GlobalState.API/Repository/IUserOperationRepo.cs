@@ -7,5 +7,6 @@ namespace GlobalState.API.Repository
 {
     public interface IUserOperationRepo
     {
+        string GetVersion();
     }
 }

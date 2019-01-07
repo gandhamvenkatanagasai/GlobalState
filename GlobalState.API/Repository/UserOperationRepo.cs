@@ -10,5 +10,14 @@ namespace GlobalState.API.Repository
     public class UserOperationRepo : IUserOperationRepo
     {
         IDatabase cache = RedisConnectorHelper.Connection.GetDatabase();
+
+        public string GetVersion()
+        {
+            return Environment.GetEnvironmentVariable("CurrentVersion");
+        }
+
     }
+
+    
+
 }

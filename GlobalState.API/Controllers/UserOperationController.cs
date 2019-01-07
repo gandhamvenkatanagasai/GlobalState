@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace GlobalState.API.Controllers
 {
+    [Route("api/[controller]")]
     public class UserOperationController : Controller
     {
         private readonly IUserOperationServices _operationServices;
@@ -16,9 +17,9 @@ namespace GlobalState.API.Controllers
             _operationServices = operationServices;
         }
 
-        public IActionResult Index()
+        public string Index()
         {
-            return View();
+            return _operationServices.GetVersion();            
         }
     }
 }

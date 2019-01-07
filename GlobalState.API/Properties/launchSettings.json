@@ -15,7 +15,8 @@
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
         "IsRedisEnabled": "1",
-        "RedisConnectionString": "localhost"
+        "RedisConnectionString": "localhost",
+        "CurrentVersion" : "1.0"
       }
     },
     "GlobalState.API": {
@@ -25,7 +26,8 @@
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
         "IsRedisEnabled": "1",
-        "RedisConnectionString": "localhost"
+        "RedisConnectionString": "localhost",
+        "CurrentVersion": "1.0"
 
       },
       "applicationUrl": "http://localhost:50299/"

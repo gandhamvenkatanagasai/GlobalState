@@ -7,5 +7,6 @@ namespace GlobalState.API.Services
 {
     public interface IUserOperationServices
     {
+        string GetVersion();
     }
 }

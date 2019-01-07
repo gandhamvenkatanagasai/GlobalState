@@ -15,5 +15,9 @@ namespace GlobalState.API.Services
             _operationRepo = operationRepo;
         }
 
+        public string GetVersion()
+        {
+           return _operationRepo.GetVersion();
+        }
     }
 }
