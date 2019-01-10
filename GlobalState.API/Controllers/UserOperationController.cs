@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using GlobalState.API.Models.UserEntities;
 using GlobalState.API.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GlobalState.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     public class UserOperationController : Controller
     {
         private readonly IUserOperationServices _operationServices;
@@ -19,7 +20,19 @@ namespace GlobalState.API.Controllers
 
         public string Index()
         {
-            return _operationServices.GetVersion();            
+            var value = _operationServices.GetVersion();
+            return value;
         }
+
+        [HttpPost]
+        public UserAccountDetail RegisterUserAccount([FromBody]UserAccountDetail userAccountDetail)
+        {
+            return  _operationServices.RegisterUserAccount(userAccountDetail);
+        }
+        public void SendVerificationLinkEmail()
+        {
+
+        }
+
     }
 }

@@ -11,24 +11,25 @@
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
-      "launchUrl": "api/values",
+      "launchUrl": "api/UserOperation/Index",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
         "IsRedisEnabled": "1",
         "RedisConnectionString": "localhost",
-        "CurrentVersion" : "1.0"
+        "CurrentVersion": "1.0",
+        "SqlConnectionString": ""
       }
     },
     "GlobalState.API": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "api/values",
+      "launchUrl": "api/UserOperation/Index",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
         "IsRedisEnabled": "1",
         "RedisConnectionString": "localhost",
-        "CurrentVersion": "1.0"
-
+        "CurrentVersion": "1.0",
+        "SqlConnectionString": ""
       },
       "applicationUrl": "http://localhost:50299/"
     }

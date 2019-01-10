@@ -1,4 +1,5 @@
-﻿using GlobalState.API.Repository;
+﻿using GlobalState.API.Models.UserEntities;
+using GlobalState.API.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,10 +15,13 @@ namespace GlobalState.API.Services
         {
             _operationRepo = operationRepo;
         }
-
         public string GetVersion()
         {
-           return _operationRepo.GetVersion();
+            return _operationRepo.GetVersion();
+        }
+        public UserAccountDetail RegisterUserAccount(UserAccountDetail userAccountDetail)
+        {
+            return _operationRepo.RegisterUserAccount(userAccountDetail);
         }
     }
 }
