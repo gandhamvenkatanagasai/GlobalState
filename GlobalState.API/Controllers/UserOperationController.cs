@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using GlobalState.API.Models;
 using GlobalState.API.Models.UserEntities;
 using GlobalState.API.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -25,10 +26,29 @@ namespace GlobalState.API.Controllers
         }
 
         [HttpPost]
-        public UserAccountDetail RegisterUserAccount([FromBody]UserAccountDetail userAccountDetail)
+        public async Task<IEnumerable<UserAccountDetail>> RegisterUserAccount([FromBody]UserAccountDetail userAccountDetail)
         {
-            return  _operationServices.RegisterUserAccount(userAccountDetail);
+            return await _operationServices.ManageUserAccount(userAccountDetail);
         }
+        [HttpPost]
+        public async Task<IEnumerable<UserAccountDetail>> LoginUserAccount([FromBody]UserAccountDetail userAccountDetail)
+        {
+            return await _operationServices.ManageUserAccount(userAccountDetail);
+        }
+
+        [HttpPost]
+        public async Task<IEnumerable<MainCategoryDTO>> ManageMainCategory([FromBody]MainCategoryDTO data)
+        {
+            return await _operationServices.ManageMainCategory(data);
+        }
+        [HttpPost]
+        public async Task<IEnumerable<CategoryDTO>> ManageCategory([FromBody]CategoryDTO data)
+        {
+            return await _operationServices.ManageCategory(data);
+        }
+
+
+
         public void SendVerificationLinkEmail()
         {
 

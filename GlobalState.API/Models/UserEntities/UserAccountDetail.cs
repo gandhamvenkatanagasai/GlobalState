@@ -7,6 +7,7 @@ namespace GlobalState.API.Models.UserEntities
 {
     public class UserAccountDetail
     {
+        public int action { get; set; }
         public int? LId { get; set; }
         public string UserName { get; set; }
         public string Password { get; set; }

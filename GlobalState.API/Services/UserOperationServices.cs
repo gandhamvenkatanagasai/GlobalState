@@ -1,4 +1,5 @@
-﻿using GlobalState.API.Models.UserEntities;
+﻿using GlobalState.API.Models;
+using GlobalState.API.Models.UserEntities;
 using GlobalState.API.Repository;
 using System;
 using System.Collections.Generic;
@@ -19,9 +20,17 @@ namespace GlobalState.API.Services
         {
             return _operationRepo.GetVersion();
         }
-        public UserAccountDetail RegisterUserAccount(UserAccountDetail userAccountDetail)
+        public async Task<IEnumerable<UserAccountDetail>> ManageUserAccount(UserAccountDetail userAccountDetail)
         {
-            return _operationRepo.RegisterUserAccount(userAccountDetail);
+            return await _operationRepo.ManageUserAccount(userAccountDetail);
+        }
+        public async Task<IEnumerable<MainCategoryDTO>> ManageMainCategory(MainCategoryDTO data)
+        {
+            return await _operationRepo.ManageMainCategory(data);
+        }
+        public async Task<IEnumerable<CategoryDTO>> ManageCategory(CategoryDTO data)
+        {
+            return await _operationRepo.ManageCategory(data);
         }
     }
 }
