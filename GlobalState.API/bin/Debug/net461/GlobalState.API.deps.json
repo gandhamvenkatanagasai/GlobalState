@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETFramework,Version=v4.6.1/win7-x86",
-    "signature": "956a83b342516190bd857715f16d67c5aa1d7cf6"
+    "signature": "55c6b39f54ef39f0d7ca2df68ee7d765b7c0ec46"
   },
   "compilationOptions": {
     "defines": [
@@ -24,6 +24,7 @@
     ".NETFramework,Version=v4.6.1": {
       "GlobalState.API/1.0.0": {
         "dependencies": {
+          "Dapper": "1.50.5",
           "Microsoft.AspNetCore": "2.0.3",
           "Microsoft.AspNetCore.Mvc": "2.0.4",
           "Microsoft.AspNetCore.StaticFiles": "2.0.2",
@@ -757,6 +758,11 @@
       "System.Xml.XPath.XDocument.Reference/4.1.0.0": {
         "compile": {
           "System.Xml.XPath.XDocument.dll": {}
+        }
+      },
+      "Dapper/1.50.5": {
+        "compile": {
+          "lib/net451/Dapper.dll": {}
         }
       },
       "Libuv/1.10.0": {
@@ -2075,6 +2081,7 @@
     ".NETFramework,Version=v4.6.1/win7-x86": {
       "GlobalState.API/1.0.0": {
         "dependencies": {
+          "Dapper": "1.50.5",
           "Microsoft.AspNetCore": "2.0.3",
           "Microsoft.AspNetCore.Mvc": "2.0.4",
           "Microsoft.AspNetCore.StaticFiles": "2.0.2",
@@ -2208,6 +2215,11 @@
         },
         "runtime": {
           "GlobalState.API.exe": {}
+        }
+      },
+      "Dapper/1.50.5": {
+        "runtime": {
+          "lib/net451/Dapper.dll": {}
         }
       },
       "Libuv/1.10.0": {
@@ -3536,6 +3548,13 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "Dapper/1.50.5": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-AzAdZ9fEzUtav3Sbc5CMgz5O2oYkc5g1r+g1h/Vn+wqcInII+xtNEfyZryeW90Wq72bxjEBJhe18j+2SrGrc5A==",
+      "path": "dapper/1.50.5",
+      "hashPath": "dapper.1.50.5.nupkg.sha512"
     },
     "Libuv/1.10.0": {
       "type": "package",

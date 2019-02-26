@@ -2,6 +2,7 @@
 using GlobalState.API.Models;
 using GlobalState.API.Models.UserEntities;
 using GlobalState.API.Utilities;
+using Newtonsoft.Json;
 using StackExchange.Redis;
 using System;
 using System.Collections.Generic;
@@ -25,24 +26,12 @@ namespace GlobalState.API.Repository
         {
             return Environment.GetEnvironmentVariable("CurrentVersion");
         }
-        private static bool Save(string host,string key,string value)
-        {
-            bool isSuccess = false;
-            return isSuccess;
-        }
-
-
-
-
         public async Task<IEnumerable<UserAccountDetail>> ManageUserAccount(UserAccountDetail userAccountDetail)
         {
           
                 try
                 {
-                
-
-
-                db.Open();                
+                    db.Open();                
                     var parameter = new DynamicParameters();
                     parameter.Add("@Id", userAccountDetail.LId);
                     parameter.Add("@action", userAccountDetail.action);
@@ -76,16 +65,15 @@ namespace GlobalState.API.Repository
                 finally
                 {
                 db.Close();
-                }
-
-            
+                }   
         }
 
         public async Task<IEnumerable<MainCategoryDTO>> ManageMainCategory(MainCategoryDTO MData)
         {
             try
             {
-                db.Open();              
+                db.Open();
+                IEnumerable<MainCategoryDTO> list;              
                 var parameter = new DynamicParameters();
                 parameter.Add("@Id", MData.Id);
                 parameter.Add("@action", MData.action);
@@ -93,9 +81,8 @@ namespace GlobalState.API.Repository
                 parameter.Add("@ImagePath", MData.ImagePath);
                 parameter.Add("@IsActive", MData.IsActive);
                 parameter.Add("@CreatedBy", MData.CreatedBy);
-                parameter.Add("@UpdatedBy", MData.UpdatedBy);         
-                return (await db.QueryAsync<MainCategoryDTO>("Sp_manageMainCategory", parameter, commandType: CommandType.StoredProcedure)).AsList();          
-
+                parameter.Add("@UpdatedBy", MData.UpdatedBy);             
+                return (await db.QueryAsync<MainCategoryDTO>("Sp_manageMainCategory", parameter, commandType: CommandType.StoredProcedure)).AsList();
             }
             catch (Exception ex)
             {
@@ -112,7 +99,7 @@ namespace GlobalState.API.Repository
         {
             try
             {
-                db.Open();
+                db.Open();      
                 var parameter = new DynamicParameters();
                 parameter.Add("@Id", data.Id);
                 parameter.Add("@action", data.action);
@@ -123,7 +110,6 @@ namespace GlobalState.API.Repository
                 parameter.Add("@CreatedBy", data.CreatedBy);
                 parameter.Add("@UpdatedBy", data.UpdatedBy);
                 return (await db.QueryAsync<CategoryDTO>("Sp_manageCategory", parameter, commandType: CommandType.StoredProcedure)).AsList();
-
             }
             catch (Exception ex)
             {
