@@ -19,6 +19,7 @@ namespace GlobalState.API.Repository
         private static readonly RedisHelper RedisConnection = new RedisHelper();
         //Use in each method when doing the Redis Operation
         private static readonly IDatabase _redisExtension = RedisConnection.GetConnection();
+        private string connectionstring = Environment.GetEnvironmentVariable("SqlConnectionString");
 
         static IDbConnection db = new SqlConnection(Environment.GetEnvironmentVariable("SqlConnectionString"));
 
@@ -72,17 +73,42 @@ namespace GlobalState.API.Repository
         {
             try
             {
-                db.Open();
-                IEnumerable<MainCategoryDTO> list;              
-                var parameter = new DynamicParameters();
-                parameter.Add("@Id", MData.Id);
-                parameter.Add("@action", MData.action);
-                parameter.Add("@Name", MData.Name);
-                parameter.Add("@ImagePath", MData.ImagePath);
-                parameter.Add("@IsActive", MData.IsActive);
-                parameter.Add("@CreatedBy", MData.CreatedBy);
-                parameter.Add("@UpdatedBy", MData.UpdatedBy);             
-                return (await db.QueryAsync<MainCategoryDTO>("Sp_manageMainCategory", parameter, commandType: CommandType.StoredProcedure)).AsList();
+
+                List<MainCategoryDTO> list = new List<MainCategoryDTO>();
+
+                using (SqlConnection con = new SqlConnection(connectionstring))
+                {
+                    SqlCommand cmd = new SqlCommand("Sp_manageMainCategory", con);
+                    cmd.Parameters.AddWithValue("Name", MData.Name);
+                    cmd.Parameters.AddWithValue("ImagePath", MData.ImagePath);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    con.Open();
+                    SqlDataReader rdr =await  cmd.ExecuteReaderAsync();
+
+                    while (await rdr.ReadAsync())
+                    {
+                        MainCategoryDTO mainCategory = new MainCategoryDTO();
+                        mainCategory.Id = Convert.ToInt32(rdr["Id"]);
+                        mainCategory.Name = rdr["Name"].ToString();
+                        mainCategory.ImagePath = rdr["ImagePath"].ToString();
+                        mainCategory.message = rdr["message"].ToString();
+                        mainCategory.res = Convert.ToInt32(rdr["res"]);
+                        list.Add(mainCategory);
+                    }
+                    con.Close();
+                }
+                return list;
+                //db.Open();
+                //IEnumerable<MainCategoryDTO> list;              
+                //var parameter = new DynamicParameters();
+                //parameter.Add("@Id", MData.Id);
+                //parameter.Add("@action", MData.action);
+                //parameter.Add("@Name", MData.Name);
+                //parameter.Add("@ImagePath", MData.ImagePath);
+                //parameter.Add("@IsActive", MData.IsActive);
+                //parameter.Add("@CreatedBy", MData.CreatedBy);
+                //parameter.Add("@UpdatedBy", MData.UpdatedBy);             
+                //return (await db.QueryAsync<MainCategoryDTO>("Sp_manageMainCategory", parameter, commandType: CommandType.StoredProcedure)).AsList();
             }
             catch (Exception ex)
             {
@@ -99,17 +125,44 @@ namespace GlobalState.API.Repository
         {
             try
             {
-                db.Open();      
-                var parameter = new DynamicParameters();
-                parameter.Add("@Id", data.Id);
-                parameter.Add("@action", data.action);
-                parameter.Add("@MID", data.MID);
-                parameter.Add("@Name", data.Name);
-                parameter.Add("@ImagePath", data.ImagePath);
-                parameter.Add("@IsActive", data.IsActive);
-                parameter.Add("@CreatedBy", data.CreatedBy);
-                parameter.Add("@UpdatedBy", data.UpdatedBy);
-                return (await db.QueryAsync<CategoryDTO>("Sp_manageCategory", parameter, commandType: CommandType.StoredProcedure)).AsList();
+                List<CategoryDTO> list = new List<CategoryDTO>();
+
+                using (SqlConnection con = new SqlConnection(connectionstring))
+                {
+                    SqlCommand cmd = new SqlCommand("Sp_manageCategory", con);
+                    cmd.Parameters.AddWithValue("MID", data.MID);
+                    cmd.Parameters.AddWithValue("Name", data.Name);
+                    cmd.Parameters.AddWithValue("ImagePath", data.ImagePath);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    con.Open();
+                    SqlDataReader rdr = await cmd.ExecuteReaderAsync();
+
+                    while (await rdr.ReadAsync())
+                    {
+                        CategoryDTO category = new CategoryDTO();
+                        category.Id = Convert.ToInt32(rdr["Id"]);
+                        category.MID = Convert.ToInt32(rdr["MID"]);
+                        category.MainCategoryName = rdr["MainCategoryName"].ToString();
+                        category.Name = rdr["Name"].ToString();
+                        category.ImagePath = rdr["ImagePath"].ToString();
+                        category.message = rdr["message"].ToString();
+                        category.res = Convert.ToInt32(rdr["res"]);
+                        list.Add(category);
+                    }
+                    con.Close();
+                }
+                return list;
+                //db.Open();      
+                //var parameter = new DynamicParameters();
+                //parameter.Add("@Id", data.Id);
+                //parameter.Add("@action", data.action);
+                //parameter.Add("@MID", data.MID);
+                //parameter.Add("@Name", data.Name);
+                //parameter.Add("@ImagePath", data.ImagePath);
+                //parameter.Add("@IsActive", data.IsActive);
+                //parameter.Add("@CreatedBy", data.CreatedBy);
+                //parameter.Add("@UpdatedBy", data.UpdatedBy);
+                //return (await db.QueryAsync<CategoryDTO>("Sp_manageCategory", parameter, commandType: CommandType.StoredProcedure)).AsList();
             }
             catch (Exception ex)
             {
