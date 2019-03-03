@@ -15,7 +15,7 @@
       "environmentVariables": {
         "RedisConnectionString": "localhost",
         "IsRedisEnabled": "1",
-        "SqlConnectionString": "Data Source=DESKTOP-RP11D47\\MSSQLSERVER17;Initial Catalog=GlobalState; UID=sa;Password=pass;",
+        "SqlConnectionString": "Data Source=NIPTOW-MAIN\\MSSQLSERVER17;Initial Catalog=AddPost; UID=sa;Password=pass;",
         "ASPNETCORE_ENVIRONMENT": "Development",
         "CurrentVersion": "1.0"
       }

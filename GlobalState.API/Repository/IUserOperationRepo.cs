@@ -13,5 +13,6 @@ namespace GlobalState.API.Repository
         Task<IEnumerable<UserAccountDetail>> ManageUserAccount(UserAccountDetail userAccountDetail);
         Task<IEnumerable<MainCategoryDTO>> ManageMainCategory(MainCategoryDTO data);
         Task<IEnumerable<CategoryDTO>> ManageCategory(CategoryDTO data);
+        Task<IEnumerable<Master_SettingTypes>> ManageMaster_SettingTypes(Master_SettingTypes data);
     }
 }

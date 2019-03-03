@@ -174,6 +174,51 @@ namespace GlobalState.API.Repository
                 db.Close();
             }
         }
+
+        public async Task<IEnumerable<Master_SettingTypes>> ManageMaster_SettingTypes(Master_SettingTypes data)
+        {
+            try
+            {
+                List<Master_SettingTypes> list = new List<Master_SettingTypes>();
+
+                using (SqlConnection con = new SqlConnection(connectionstring))
+                {
+                    SqlCommand cmd = new SqlCommand("Sp_manageMaster_SettingTypes", con);
+                    cmd.Parameters.AddWithValue("SettingTypeId", data.SettingTypeId);
+                    cmd.Parameters.AddWithValue("SettingTypeName", data.SettingTypeName);
+                    cmd.Parameters.AddWithValue("Active", data.IsActive);
+                    cmd.Parameters.AddWithValue("CreatedBy", data.CreatedBy);
+                    cmd.Parameters.AddWithValue("UpdatedBy", data.UpdatedBy);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    con.Open();
+                    SqlDataReader rdr = await cmd.ExecuteReaderAsync();
+
+                    while (await rdr.ReadAsync())
+                    {
+                        Master_SettingTypes listData = new Master_SettingTypes();
+                        listData.SettingTypeId = Convert.ToInt32(rdr["SettingTypeId"]);
+                        listData.SettingTypeName = rdr["SettingTypeName"].ToString();
+                        listData.CreatedBy = rdr["CreatedBy"].ToString();
+                        listData.UpdatedBy = rdr["UpdatedBy"].ToString();
+                        listData.IsActive = Convert.ToBoolean(rdr["Active"]);                 
+                        listData.message = rdr["message"].ToString();
+                        listData.res = Convert.ToInt32(rdr["res"]);
+                        list.Add(listData);
+                    }
+                    con.Close();
+                }
+                return list;            
+            }
+            catch (Exception ex)
+            {
+                db.Close();
+                throw ex;
+            }
+            finally
+            {
+                db.Close();
+            }
+        }
     }   
 
 }

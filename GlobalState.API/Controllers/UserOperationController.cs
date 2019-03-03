@@ -46,6 +46,11 @@ namespace GlobalState.API.Controllers
         {
             return await _operationServices.ManageCategory(data);
         }
+        [HttpPost]
+        public async Task<IEnumerable<Master_SettingTypes>> ManageMaster_SettingTypes([FromBody]Master_SettingTypes data)
+        {
+            return await _operationServices.ManageMaster_SettingTypes(data);
+        }
 
 
 
