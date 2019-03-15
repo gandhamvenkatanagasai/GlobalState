@@ -33,9 +33,21 @@ namespace GlobalState.API.Services
             return await _operationRepo.ManageCategory(data);
         }
 
-        public async Task<IEnumerable<Master_SettingTypes>> ManageMaster_SettingTypes(Master_SettingTypes data)
+        public async Task<IEnumerable<Master_SettingTypes>> ManageSettingTypes(Master_SettingTypes data)
         {
             return await _operationRepo.ManageMaster_SettingTypes(data);
+        }
+        public async Task<IEnumerable<User_UserDetails>> ManageUserDetails(User_UserDetails data)
+        {
+            return await _operationRepo.ManageUserDetails(data);
+        }
+        public async Task<IEnumerable<Master_NotificationTypeDetails>> ManageNotificationTypeDetails(Master_NotificationTypeDetails data)
+        {
+            return await _operationRepo.ManageNotificationTypeDetails(data);
+        }
+        public async Task<IEnumerable<Master_CityNameDetails>> ManageCity(Master_CityNameDetails data)
+        {
+            return await _operationRepo.ManageCity(data);
         }
     }
 }

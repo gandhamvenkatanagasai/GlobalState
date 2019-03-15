@@ -29,17 +29,17 @@ namespace GlobalState.API.Repository
         }
         public async Task<IEnumerable<UserAccountDetail>> ManageUserAccount(UserAccountDetail userAccountDetail)
         {
-          
-                try
-                {
-                    db.Open();                
-                    var parameter = new DynamicParameters();
-                    parameter.Add("@Id", userAccountDetail.LId);
-                    parameter.Add("@action", userAccountDetail.action);
-                    parameter.Add("@UserName", userAccountDetail.UserName);
-                    parameter.Add("@EmailId", userAccountDetail.EmailId);
-                    parameter.Add("@Password", userAccountDetail.Password);
-                    return (await db.QueryAsync<UserAccountDetail>("USP_UserAccount", parameter, commandType: CommandType.StoredProcedure)).AsList();
+
+            try
+            {
+                db.Open();
+                var parameter = new DynamicParameters();
+                parameter.Add("@Id", userAccountDetail.LId);
+                parameter.Add("@action", userAccountDetail.action);
+                parameter.Add("@UserName", userAccountDetail.UserName);
+                parameter.Add("@EmailId", userAccountDetail.EmailId);
+                parameter.Add("@Password", userAccountDetail.Password);
+                return (await db.QueryAsync<UserAccountDetail>("USP_UserAccount", parameter, commandType: CommandType.StoredProcedure)).AsList();
                 //con.Open();
                 //SqlCommand command = new SqlCommand("USP_UserAccount", con);
                 //command.CommandType = System.Data.CommandType.StoredProcedure;
@@ -58,15 +58,15 @@ namespace GlobalState.API.Repository
                 //  "uspUserRegistration", parameters, commandType: StoredProcedure);
                 //return result.FirstOrDefault();
 
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                finally
-                {
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
                 db.Close();
-                }   
+            }
         }
 
         public async Task<IEnumerable<MainCategoryDTO>> ManageMainCategory(MainCategoryDTO MData)
@@ -83,7 +83,7 @@ namespace GlobalState.API.Repository
                     cmd.Parameters.AddWithValue("ImagePath", MData.ImagePath);
                     cmd.CommandType = CommandType.StoredProcedure;
                     con.Open();
-                    SqlDataReader rdr =await  cmd.ExecuteReaderAsync();
+                    SqlDataReader rdr = await cmd.ExecuteReaderAsync();
 
                     while (await rdr.ReadAsync())
                     {
@@ -200,14 +200,14 @@ namespace GlobalState.API.Repository
                         listData.SettingTypeName = rdr["SettingTypeName"].ToString();
                         listData.CreatedBy = rdr["CreatedBy"].ToString();
                         listData.UpdatedBy = rdr["UpdatedBy"].ToString();
-                        listData.IsActive = Convert.ToBoolean(rdr["Active"]);                 
+                        listData.IsActive = Convert.ToBoolean(rdr["Active"]);
                         listData.message = rdr["message"].ToString();
                         listData.res = Convert.ToInt32(rdr["res"]);
                         list.Add(listData);
                     }
                     con.Close();
                 }
-                return list;            
+                return list;
             }
             catch (Exception ex)
             {
@@ -219,6 +219,160 @@ namespace GlobalState.API.Repository
                 db.Close();
             }
         }
-    }   
 
+
+        public async Task<IEnumerable<Master_NotificationTypeDetails>> ManageNotificationTypeDetails(Master_NotificationTypeDetails data)
+        {
+            try
+            {
+                List<Master_NotificationTypeDetails> list = new List<Master_NotificationTypeDetails>();
+
+                using (SqlConnection con = new SqlConnection(connectionstring))
+                {
+                    SqlCommand cmd = new SqlCommand("Sp_manageMaster_SettingTypes", con);
+                    cmd.Parameters.AddWithValue("TypeId", data.TypeId);
+                    cmd.Parameters.AddWithValue("Type", data.Type);
+                    cmd.Parameters.AddWithValue("Active", data.IsActive);
+                    cmd.Parameters.AddWithValue("CreatedBy", data.CreatedBy);
+                    cmd.Parameters.AddWithValue("UpdatedBy", data.UpdatedBy);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    con.Open();
+                    SqlDataReader rdr = await cmd.ExecuteReaderAsync();
+
+                    while (await rdr.ReadAsync())
+                    {
+                        Master_NotificationTypeDetails listData = new Master_NotificationTypeDetails();
+                        listData.TypeId = Convert.ToInt32(rdr["TypeId"]);
+                        listData.Type = rdr["Type"].ToString();
+                        listData.CreatedBy = rdr["CreatedBy"].ToString();
+                        listData.UpdatedBy = rdr["UpdatedBy"].ToString();
+                        listData.IsActive = Convert.ToBoolean(rdr["Active"]);
+                        listData.message = rdr["message"].ToString();
+                        listData.res = Convert.ToInt32(rdr["res"]);
+                        list.Add(listData);
+                    }
+                    con.Close();
+                }
+                return list;
+            }
+            catch (Exception ex)
+            {
+                db.Close();
+                throw ex;
+            }
+            finally
+            {
+                db.Close();
+            }
+        }
+
+        public async Task<IEnumerable<User_UserDetails>> ManageUserDetailss(User_UserDetails data)
+        {
+            try
+            {
+                List<User_UserDetails> list = new List<User_UserDetails>();
+
+                using (SqlConnection con = new SqlConnection(connectionstring))
+                {
+                    SqlCommand cmd = new SqlCommand("USP_UserAccount", con);
+                    cmd.Parameters.AddWithValue("action", data.action);
+                    cmd.Parameters.AddWithValue("Username", data.Username);
+                    cmd.Parameters.AddWithValue("Password", data.Password);
+                    cmd.Parameters.AddWithValue("FirstName", data.FirstName);
+                    cmd.Parameters.AddWithValue("MiddleName", data.MiddleName);
+                    cmd.Parameters.AddWithValue("LastName", data.LastName);
+                    cmd.Parameters.AddWithValue("AddressId", data.AddressId);
+                    cmd.Parameters.AddWithValue("OtherContact", data.OtherContact);
+                    cmd.Parameters.AddWithValue("SSN", data.SSN);
+                    cmd.Parameters.AddWithValue("Mobile", data.Mobile);
+                    cmd.Parameters.AddWithValue("RoleId", data.RoleId);
+                    cmd.Parameters.AddWithValue("Active", data.IsActive);
+                    cmd.Parameters.AddWithValue("CreatedBy", data.CreatedBy);
+                    cmd.Parameters.AddWithValue("UpdatedBy", data.UpdatedBy);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    con.Open();
+                    SqlDataReader rdr = await cmd.ExecuteReaderAsync();
+
+                    while (await rdr.ReadAsync())
+                    {
+                        User_UserDetails listData = new User_UserDetails();
+                        listData.AddressId = Convert.ToInt32(rdr["AddressId"]);
+                        listData.FirstName = rdr["FirstName"].ToString();
+                        listData.MiddleName = rdr["MiddleName"].ToString();
+                        listData.LastName = rdr["LastName"].ToString();
+                        listData.Mobile = rdr["Mobile"].ToString();
+                        listData.RoleId = Convert.ToInt32(rdr["RoleId"]);
+                        listData.status = Convert.ToInt32(rdr["status"]);
+                        listData.LId = Convert.ToInt32(rdr["LId"]);
+                        listData.UpdatedBy = rdr["UpdatedBy"].ToString();
+                        listData.IsActive = Convert.ToBoolean(rdr["Active"]);
+                        listData.message = rdr["message"].ToString();
+                        listData.res = Convert.ToInt32(rdr["res"]);
+                        list.Add(listData);
+                    }
+                    con.Close();
+                }
+                return list;
+            }
+            catch (Exception ex)
+            {
+                db.Close();
+                throw ex;
+            }
+            finally
+            {
+                db.Close();
+            }
+        }
+
+
+
+
+
+
+        public async Task<IEnumerable<Master_CityNameDetails>> ManageCity(Master_CityNameDetails data)
+        {
+            try
+            {
+                List<Master_CityNameDetails> list = new List<Master_CityNameDetails>();
+
+                using (SqlConnection con = new SqlConnection(connectionstring))
+                {
+                    SqlCommand cmd = new SqlCommand("Sp_manageCityDetails", con);
+                    cmd.Parameters.AddWithValue("CityId", data.CityId);
+                    cmd.Parameters.AddWithValue("City", data.City);
+                    cmd.Parameters.AddWithValue("Active", data.IsActive);
+                    cmd.Parameters.AddWithValue("CreatedBy", data.CreatedBy);
+                    cmd.Parameters.AddWithValue("UpdatedBy", data.UpdatedBy);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    con.Open();
+                    SqlDataReader rdr = await cmd.ExecuteReaderAsync();
+
+                    while (await rdr.ReadAsync())
+                    {
+                        Master_CityNameDetails listData = new Master_CityNameDetails();
+                        listData.CityId = Convert.ToInt32(rdr["CityId"]);
+                        listData.City = rdr["City"].ToString();
+                        listData.CreatedBy = rdr["CreatedBy"].ToString();
+                        listData.UpdatedBy = rdr["UpdatedBy"].ToString();
+                        listData.IsActive = Convert.ToBoolean(rdr["Active"]);
+                        listData.message = rdr["message"].ToString();
+                        listData.res = Convert.ToInt32(rdr["res"]);
+                        list.Add(listData);
+                    }
+                    con.Close();
+                }
+                return list;
+            }
+            catch (Exception ex)
+            {
+                db.Close();
+                throw ex;
+            }
+            finally
+            {
+                db.Close();
+            }
+        }
+    }
 }
