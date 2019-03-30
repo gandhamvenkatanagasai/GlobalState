@@ -266,7 +266,7 @@ namespace GlobalState.API.Repository
             }
         }
 
-        public async Task<IEnumerable<User_UserDetails>> ManageUserDetailss(User_UserDetails data)
+        public async Task<IEnumerable<User_UserDetails>> ManageUserDetails(User_UserDetails data)
         {
             try
             {

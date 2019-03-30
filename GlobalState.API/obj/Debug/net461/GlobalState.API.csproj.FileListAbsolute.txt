@@ -337,3 +337,8 @@ C:\Users\asus\Source\Repos\GlobalState\GlobalState.API\bin\Debug\net461\refs\Sys
 C:\Users\asus\Source\Repos\GlobalState\GlobalState.API\bin\Debug\net461\Microsoft.VisualStudio.Web.BrowserLink.dll
 C:\Users\asus\Source\Repos\GlobalState\GlobalState.API\obj\Debug\net461\GlobalState.API.exe
 C:\Users\asus\Source\Repos\GlobalState\GlobalState.API\obj\Debug\net461\GlobalState.API.pdb
+D:\GlobalTeamRepositoryNew\GlobalState.API\obj\Debug\net461\GlobalState.API.csprojAssemblyReference.cache
+D:\GlobalTeamRepositoryNew\GlobalState.API\obj\Debug\net461\GlobalState.API.exe.config
+D:\GlobalTeamRepositoryNew\GlobalState.API\obj\Debug\net461\GlobalState.API.csproj.CoreCompileInputs.cache
+D:\GlobalTeamRepositoryNew\GlobalState.API\obj\Debug\net461\GlobalState.API.AssemblyInfoInputs.cache
+D:\GlobalTeamRepositoryNew\GlobalState.API\obj\Debug\net461\GlobalState.API.AssemblyInfo.cs
