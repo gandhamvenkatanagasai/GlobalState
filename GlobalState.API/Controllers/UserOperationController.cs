@@ -64,8 +64,15 @@ namespace GlobalState.API.Controllers
         }
 
 
+        [HttpPost]
+        public async Task<IEnumerable<Master_CityNameDetails>> ManageCity([FromBody]Master_CityNameDetails data)
+        {
+            return await _operationServices.ManageCity(data);
+        }
 
 
+
+        
 
         public void SendVerificationLinkEmail()
         {

@@ -79,6 +79,7 @@ namespace GlobalState.API.Repository
                 using (SqlConnection con = new SqlConnection(connectionstring))
                 {
                     SqlCommand cmd = new SqlCommand("Sp_manageMainCategory", con);
+                    cmd.Parameters.AddWithValue("action", MData.action);
                     cmd.Parameters.AddWithValue("Name", MData.Name);
                     cmd.Parameters.AddWithValue("ImagePath", MData.ImagePath);
                     cmd.CommandType = CommandType.StoredProcedure;
@@ -91,8 +92,11 @@ namespace GlobalState.API.Repository
                         mainCategory.Id = Convert.ToInt32(rdr["Id"]);
                         mainCategory.Name = rdr["Name"].ToString();
                         mainCategory.ImagePath = rdr["ImagePath"].ToString();
-                        mainCategory.message = rdr["message"].ToString();
-                        mainCategory.res = Convert.ToInt32(rdr["res"]);
+                        if (MData.action == 2 || MData.action == 3)
+                        {
+                            mainCategory.message = rdr["message"].ToString();
+                            mainCategory.res = Convert.ToInt32(rdr["res"]);
+                        }
                         list.Add(mainCategory);
                     }
                     con.Close();
@@ -130,6 +134,7 @@ namespace GlobalState.API.Repository
                 using (SqlConnection con = new SqlConnection(connectionstring))
                 {
                     SqlCommand cmd = new SqlCommand("Sp_manageCategory", con);
+                    cmd.Parameters.AddWithValue("action", data.action);
                     cmd.Parameters.AddWithValue("MID", data.MID);
                     cmd.Parameters.AddWithValue("Name", data.Name);
                     cmd.Parameters.AddWithValue("ImagePath", data.ImagePath);
@@ -145,8 +150,12 @@ namespace GlobalState.API.Repository
                         category.MainCategoryName = rdr["MainCategoryName"].ToString();
                         category.Name = rdr["Name"].ToString();
                         category.ImagePath = rdr["ImagePath"].ToString();
-                        category.message = rdr["message"].ToString();
-                        category.res = Convert.ToInt32(rdr["res"]);
+                        if (data.action == 2 || data.action == 3)
+                        {
+                            category.message = rdr["message"].ToString();
+                            category.res = Convert.ToInt32(rdr["res"]);
+                        }
+
                         list.Add(category);
                     }
                     con.Close();
@@ -184,6 +193,7 @@ namespace GlobalState.API.Repository
                 using (SqlConnection con = new SqlConnection(connectionstring))
                 {
                     SqlCommand cmd = new SqlCommand("Sp_manageMaster_SettingTypes", con);
+                    cmd.Parameters.AddWithValue("@action", data.action);
                     cmd.Parameters.AddWithValue("SettingTypeId", data.SettingTypeId);
                     cmd.Parameters.AddWithValue("SettingTypeName", data.SettingTypeName);
                     cmd.Parameters.AddWithValue("Active", data.IsActive);
@@ -201,8 +211,11 @@ namespace GlobalState.API.Repository
                         listData.CreatedBy = rdr["CreatedBy"].ToString();
                         listData.UpdatedBy = rdr["UpdatedBy"].ToString();
                         listData.IsActive = Convert.ToBoolean(rdr["Active"]);
-                        listData.message = rdr["message"].ToString();
-                        listData.res = Convert.ToInt32(rdr["res"]);
+                        if (data.action == 2 || data.action == 3)
+                        {
+                            listData.message = rdr["message"].ToString();
+                            listData.res = Convert.ToInt32(rdr["res"]);
+                        }
                         list.Add(listData);
                     }
                     con.Close();
@@ -229,7 +242,8 @@ namespace GlobalState.API.Repository
 
                 using (SqlConnection con = new SqlConnection(connectionstring))
                 {
-                    SqlCommand cmd = new SqlCommand("Sp_manageMaster_SettingTypes", con);
+                    SqlCommand cmd = new SqlCommand("Sp_manageMaster_NotificationTypeDetails", con);
+                    cmd.Parameters.AddWithValue("action", data.action);
                     cmd.Parameters.AddWithValue("TypeId", data.TypeId);
                     cmd.Parameters.AddWithValue("Type", data.Type);
                     cmd.Parameters.AddWithValue("Active", data.IsActive);
@@ -247,8 +261,11 @@ namespace GlobalState.API.Repository
                         listData.CreatedBy = rdr["CreatedBy"].ToString();
                         listData.UpdatedBy = rdr["UpdatedBy"].ToString();
                         listData.IsActive = Convert.ToBoolean(rdr["Active"]);
-                        listData.message = rdr["message"].ToString();
-                        listData.res = Convert.ToInt32(rdr["res"]);
+                        if (data.action == 2 || data.action == 3)
+                        {
+                            listData.message = rdr["message"].ToString();
+                            listData.res = Convert.ToInt32(rdr["res"]);
+                        }
                         list.Add(listData);
                     }
                     con.Close();
@@ -339,6 +356,7 @@ namespace GlobalState.API.Repository
                 using (SqlConnection con = new SqlConnection(connectionstring))
                 {
                     SqlCommand cmd = new SqlCommand("Sp_manageCityDetails", con);
+                    cmd.Parameters.AddWithValue("action", data.action);
                     cmd.Parameters.AddWithValue("CityId", data.CityId);
                     cmd.Parameters.AddWithValue("City", data.City);
                     cmd.Parameters.AddWithValue("Active", data.IsActive);
@@ -356,8 +374,11 @@ namespace GlobalState.API.Repository
                         listData.CreatedBy = rdr["CreatedBy"].ToString();
                         listData.UpdatedBy = rdr["UpdatedBy"].ToString();
                         listData.IsActive = Convert.ToBoolean(rdr["Active"]);
-                        listData.message = rdr["message"].ToString();
-                        listData.res = Convert.ToInt32(rdr["res"]);
+                        if (data.action == 2 || data.action == 3)
+                        {
+                            listData.message = rdr["message"].ToString();
+                            listData.res = Convert.ToInt32(rdr["res"]);
+                        }
                         list.Add(listData);
                     }
                     con.Close();
