@@ -13,11 +13,11 @@
       "launchBrowser": true,
       "launchUrl": "api/UserOperation/Index",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development",
-        "IsRedisEnabled": "1",
         "RedisConnectionString": "localhost",
-        "CurrentVersion": "1.0",
-        "SqlConnectionString": ""
+        "IsRedisEnabled": "1",
+        "SqlConnectionString": "Data Source=NIPTOW-MAIN\\MSSQLSERVER17;Initial Catalog=AddPost; UID=sa;Password=pass;",
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "CurrentVersion": "1.0"
       }
     },
     "GlobalState.API": {
@@ -25,11 +25,11 @@
       "launchBrowser": true,
       "launchUrl": "api/UserOperation/Index",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development",
-        "IsRedisEnabled": "1",
         "RedisConnectionString": "localhost",
-        "CurrentVersion": "1.0",
-        "SqlConnectionString": ""
+        "IsRedisEnabled": "1",
+        "SqlConnectionString": "",
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "CurrentVersion": "1.0"
       },
       "applicationUrl": "http://localhost:50299/"
     }
